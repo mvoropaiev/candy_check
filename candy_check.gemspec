@@ -20,9 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.0')
 
-  spec.add_dependency 'google-api-client', '~> 0.8.6'
-  spec.add_dependency 'multi_json',        '~> 1.10'
-  spec.add_dependency 'thor',              '~> 0.19'
+  spec.add_dependency 'faraday',            '~> 0.15'
+  spec.add_dependency 'faraday_middleware', '~> 0.12'
+  spec.add_dependency 'google-api-client',  '~> 0.11'
+  spec.add_dependency 'thor',               '~> 0.19'
 
   spec.add_development_dependency 'bundler',         '~> 1.14'
   spec.add_development_dependency 'coveralls',       '~> 0.8'
