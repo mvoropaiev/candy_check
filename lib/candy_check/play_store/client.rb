@@ -122,6 +122,7 @@ module CandyCheck
 
       def validate_rpc!
         return if rpc.purchases.products.get
+
         raise DiscoveryError, 'Unable to get the API discovery'
       rescue NoMethodError
         raise DiscoveryError, 'Unable to get the API discovery'

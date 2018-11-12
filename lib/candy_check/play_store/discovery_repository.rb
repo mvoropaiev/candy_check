@@ -15,6 +15,7 @@ module CandyCheck
       # @return [Google::APIClient::API]
       def load
         return unless @file_path && File.exist?(@file_path)
+
         File.open(@file_path, 'rb') do |file|
           return Marshal.load(file)
         end
@@ -24,6 +25,7 @@ module CandyCheck
       # @param discovery [Google::APIClient::API]
       def save(discovery)
         return unless @file_path && discovery
+
         File.open(@file_path, 'wb') do |file|
           Marshal.dump(discovery, file)
         end

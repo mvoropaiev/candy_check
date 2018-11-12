@@ -52,6 +52,7 @@ module CandyCheck
         if should_retry?(result)
           return call_for(opposite_endpoint, receipt_data, secret)
         end
+
         result
       end
 
