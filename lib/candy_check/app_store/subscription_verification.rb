@@ -1,18 +1,17 @@
 module CandyCheck
   module AppStore
     # Verifies a latest_receipt_info block against a verification server.
-    # The call return either an {ReceiptCollection} or a {VerificationFailure}
+    # The call return either an {VerificationResponse}
+    # or a {VerificationFailure}
     class SubscriptionVerification < CandyCheck::AppStore::Verification
       # Performs the verification against the remote server
-      # @return [ReceiptCollection] if successful
+      # @return [VerificationResponse] if successful
       # @return [VerificationFailure] otherwise
       def call!
         verify!
-        if valid?
-          ReceiptCollection.new(@response['latest_receipt_info'])
-        else
-          VerificationFailure.fetch(@response['status'])
-        end
+        raise VerificationFailure, @response['status'] unless valid?
+
+        VerificationResponse.new(@response)
       end
 
       private
