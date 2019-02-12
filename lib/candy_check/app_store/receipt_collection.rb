@@ -8,7 +8,7 @@ module CandyCheck
 
       # Initializes a new instance which bases on a JSON result
       # from Apple's verification server
-      # @param attributes [Array<Hash>]
+      # @param attributes [Array<Hash>] or [Hash]
       def initialize(attributes)
         @receipts = []
         case attributes

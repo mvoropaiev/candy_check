@@ -33,11 +33,8 @@ module CandyCheck
       # by fetching an access token.
       # If the config has a cache_file the client tries to load discovery
       def boot!
-        @api_client = Google::APIClient.new(
-          application_name:    config.application_name,
-          application_version: config.application_version,
-          user_agent: user_agent
-        )
+        @api_client = Google::Apis::AndroidpublisherV2::
+                      AndroidPublisherService.new
         discover!
         authorize!
       end
@@ -51,8 +48,8 @@ module CandyCheck
       def verify(package, product_id, token)
         parameters = {
           'packageName' => package,
-          'productId'   => product_id,
-          'token'       => token
+          'productId' => product_id,
+          'token' => token
         }
         execute(parameters, rpc.purchases.products.get)
       end
@@ -65,9 +62,9 @@ module CandyCheck
       # @return [Hash] result of the API call
       def verify_subscription(package, subscription_id, token)
         parameters = {
-          'packageName'    => package,
+          'packageName' => package,
           'subscriptionId' => subscription_id,
-          'token'          => token
+          'token' => token
         }
         execute(parameters, rpc.purchases.subscriptions.get)
       end
@@ -110,13 +107,8 @@ module CandyCheck
       end
 
       def authorize!
-        api_client.authorization = Signet::OAuth2::Client.new(
-          token_credential_uri: API_URL,
-          audience:             API_URL,
-          scope:                API_SCOPE,
-          issuer:               config.issuer,
-          signing_key:          config.api_key
-        )
+        api_client.authorization =
+          Google::Auth::ServiceAccountCredentials.make_creds(scope: API_SCOPE)
         api_client.authorization.fetch_access_token!
       end
 
