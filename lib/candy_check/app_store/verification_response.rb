@@ -3,6 +3,7 @@ module CandyCheck
     class VerificationResponse
       attr_reader :attributes
       attr_reader :status
+      attr_reader :receipt
       attr_reader :latest_receipt_info
       attr_reader :latest_receipt
       attr_reader :auto_renew_status
