@@ -3,6 +3,8 @@ module CandyCheck
     # Simple HTTP client to load the receipt's data from Apple's verification
     # servers (either sandbox or production).
     class Client
+      require 'faraday_middleware'
+
       # Initialize a new client bound to an endpoint
       # @param endpoint_url [String]
       def initialize(endpoint_url)
